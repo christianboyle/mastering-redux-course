@@ -1,4 +1,4 @@
-import { createStore } from 'redux'
+import { legacy_createStore as createStore } from 'redux'
 
 function App() {
   const reducer = (state = 0, action) => {
