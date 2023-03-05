@@ -1,0 +1,60 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+  letter-spacing: 1px;
+}
+
+.main-container {
+  width: 60%;
+  margin: 1rem auto;
+}
+
+.errorMsg {
+  color: #f21e08;
+  background: #fff0f0;
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.contact-form {
+  width: 50%;
+  margin: 2rem auto;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+nav a {
+  margin: 0 1rem;
+  font-size: 1.1rem;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+  letter-spacing: 1px;
+}
+
+@media screen and (max-width: 600px) {
+  .contact-form,
+  nav,
+  .main-container {
+    width: 100%;
+  }
+
+  nav a {
+    margin: 0 0.5rem;
+  }
+}
