@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
+import { addContact } from '../actions/contactActions'
 
-const ContactForm = () => {
+const ContactForm = (props) => {
   const [contact, setContact] = useState({
     firstName: '',
     lastName: '',
@@ -26,6 +29,14 @@ const ContactForm = () => {
     const { firstName, lastName, phone } = contact
     if (firstName !== '' && lastName !== '' && phone !== '') {
       console.log(firstName, lastName, phone)
+      props.dispatch(
+        addContact({
+          id: uuidv4(),
+          firstName,
+          lastName,
+          phone
+        })
+      )
       setErrorMsg('')
     } else {
       setErrorMsg('All the fields are required.')
@@ -74,4 +85,4 @@ const ContactForm = () => {
   )
 }
 
-export default ContactForm
+export default connect()(ContactForm)
