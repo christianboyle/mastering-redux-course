@@ -1,7 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const ContactsList = () => {
+const ContactsList = (props) => {
+  const { contacts } = props
+
+  console.log('contacts', contacts)
+
   return <div>List of Contacts</div>
 }
 
-export default ContactsList
+const mapStateToProps = (state) => {
+  return {
+    contacts: state
+  }
+}
+
+export default connect(mapStateToProps)(ContactsList)
