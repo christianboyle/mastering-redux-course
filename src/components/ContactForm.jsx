@@ -37,6 +37,7 @@ const ContactForm = (props) => {
           phone
         })
       )
+      props.history.push('/list')
       setErrorMsg('')
     } else {
       setErrorMsg('All the fields are required.')

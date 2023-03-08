@@ -25,7 +25,8 @@ h1 {
   text-align: center;
 }
 
-.contact-form {
+.contact-form,
+.contacts-table {
   width: 50%;
   margin: 2rem auto;
 }
@@ -45,6 +46,17 @@ nav a {
 .submit-btn {
   margin-top: 1rem;
   letter-spacing: 1px;
+}
+
+table tr,
+table td,
+table th {
+  border: 1px solid #000;
+}
+
+table td,
+table th {
+  padding: 0.5rem;
 }
 
 @media screen and (max-width: 600px) {
