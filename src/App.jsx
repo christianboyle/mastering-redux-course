@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getAllCategories } from './actions/categoriesActions'
+import { getProducts } from './actions/productsActions'
 import SelectDropdown from './components/SelectDropdown'
 import Header from './components/Header'
-import { getProducts } from './actions/productsActions'
+import Product from './components/Product'
 
-const App = ({ categories, dispatch }) => {
+const App = ({ categories, products, dispatch }) => {
   useEffect(() => {
     dispatch(getAllCategories())
   }, [dispatch])
@@ -26,15 +27,23 @@ const App = ({ categories, dispatch }) => {
           handleCategoryChange={handleCategoryChange}
         />
       </div>
+      <div>
+        <ul className='products'>
+          {products.map(({ name, image }) => {
+            return <Product key={name} name={name} image={image} />
+          })}
+        </ul>
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  const { categories } = state
+  const { categories, products } = state
 
   return {
-    categories
+    categories,
+    products
   }
 }
 
