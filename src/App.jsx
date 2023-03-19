@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getAllCategories } from './actions/categoriesActions'
 import { getProducts } from './actions/productsActions'
+import { getAllCategories } from './actions/categoriesActions'
+import Product from './components/Product'
 import SelectDropdown from './components/SelectDropdown'
 import Header from './components/Header'
-import Product from './components/Product'
 
-const App = ({ categories, products, dispatch }) => {
+const App = ({ categories, products, loading_info, dispatch }) => {
   useEffect(() => {
     dispatch(getAllCategories())
   }, [dispatch])
@@ -22,16 +22,27 @@ const App = ({ categories, products, dispatch }) => {
     <div>
       <Header />
       <div className='category-dropdown'>
-        <SelectDropdown
-          categories={categories}
-          handleCategoryChange={handleCategoryChange}
-        />
+        {categories.length === 0 ? (
+          'Loading...'
+        ) : (
+          <SelectDropdown
+            categories={categories}
+            handleCategoryChange={handleCategoryChange}
+          />
+        )}
       </div>
+      {loading_info.error && <p className='errorMsg'>{loading_info.error}</p>}
       <div>
         <ul className='products'>
-          {products.map(({ name, image }) => {
-            return <Product key={name} name={name} image={image} />
-          })}
+          {loading_info.loading ? (
+            <p>Loading...</p>
+          ) : (
+            <React.Fragment>
+              {products.map(({ name, image }) => {
+                return <Product key={name} name={name} image={image} />
+              })}
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </div>
@@ -39,11 +50,12 @@ const App = ({ categories, products, dispatch }) => {
 }
 
 const mapStateToProps = (state) => {
-  const { categories, products } = state
+  const { categories, products, loading_info } = state
 
   return {
     categories,
-    products
+    products,
+    loading_info
   }
 }
 
