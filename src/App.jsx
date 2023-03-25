@@ -1,62 +1,35 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { getProducts } from './actions/productsActions'
-import { getAllCategories } from './actions/categoriesActions'
-import Product from './components/Product'
-import SelectDropdown from './components/SelectDropdown'
-import Header from './components/Header'
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-const App = ({ categories, products, loading_info, dispatch }) => {
-  useEffect(() => {
-    dispatch(getAllCategories())
-  }, [dispatch])
-
-  const handleCategoryChange = (event) => {
-    const category = event.target.value.trim()
-    if (category) {
-      dispatch(getProducts(category))
-    }
-  }
+function App() {
+  const [count, setCount] = useState(0)
 
   return (
-    <div>
-      <Header />
-      <div className='category-dropdown'>
-        {categories.length === 0 ? (
-          'Loading...'
-        ) : (
-          <SelectDropdown
-            categories={categories}
-            handleCategoryChange={handleCategoryChange}
-          />
-        )}
-      </div>
-      {loading_info.error && <p className='errorMsg'>{loading_info.error}</p>}
+    <div className="App">
       <div>
-        <ul className='products'>
-          {loading_info.loading ? (
-            <p>Loading...</p>
-          ) : (
-            <React.Fragment>
-              {products.map(({ name, image }) => {
-                return <Product key={name} name={name} image={image} />
-              })}
-            </React.Fragment>
-          )}
-        </ul>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://reactjs.org" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
       </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
-  const { categories, products, loading_info } = state
-
-  return {
-    categories,
-    products,
-    loading_info
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default App
