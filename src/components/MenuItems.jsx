@@ -13,6 +13,11 @@ const MenuItems = ({ categories, isLoading, isFailed, dispatch }) => {
     <div className='menu-section'>
       <h2>Menu Items</h2>
       <div className='menu-content'>
+        {isFailed && (
+          <p className='error-msg'>
+            Error while loading categories. Please try again.
+          </p>
+        )}
         {isLoading ? (
           <p className='loading'>Loading...</p>
         ) : (
