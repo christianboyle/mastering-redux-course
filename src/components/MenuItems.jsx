@@ -48,12 +48,14 @@ const MenuItems = ({ categories, isLoading, isFailed, dispatch }) => {
 }
 
 const mapStateToProps = (state) => {
-  const { categories } = state
+  const {
+    categories: { data, isLoading, isFailed }
+  } = state
 
   return {
-    categories: categories.data,
-    isLoading: categories.isLoading,
-    isFailed: categories.isFailed
+    categories: data,
+    isLoading,
+    isFailed
   }
 }
 
