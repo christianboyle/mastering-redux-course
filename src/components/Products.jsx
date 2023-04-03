@@ -5,12 +5,17 @@ import { Redirect } from 'react-router-dom'
 import { getAllProducts } from '../actions/productsActions'
 import { getQueryStringValue } from '../utils/functions'
 import Product from './Product'
+import Layout from './Layout'
 
 const Products = ({ dispatch, products, isLoading, isFailed, location }) => {
   const [category, setCategory] = useState('')
   const [selectedFilter, setSelectedFilter] = useState(false)
   const [filteredResults, setFilteredResults] = useState([])
   const { search = '' } = location
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     if (search) {
@@ -34,7 +39,7 @@ const Products = ({ dispatch, products, isLoading, isFailed, location }) => {
   }
 
   return (
-    <React.Fragment>
+    <Layout>
       {search ? (
         <div className='products'>
           <div className='main-title'>{category}</div>
@@ -90,7 +95,7 @@ const Products = ({ dispatch, products, isLoading, isFailed, location }) => {
       ) : (
         <Redirect to='/' />
       )}
-    </React.Fragment>
+    </Layout>
   )
 }
 
