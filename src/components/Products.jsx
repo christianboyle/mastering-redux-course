@@ -51,6 +51,13 @@ const Products = ({
     dispatch(getToppings())
   }, [])
 
+  const resetState = () => {
+    setSelectedProduct({})
+    setProductQuantity(1)
+    setSelectedToppingsCount(0)
+    setTotalOrderPrice(0)
+  }
+
   const toggleModal = (id, title, image, price) => {
     if (id) {
       setSelectedProduct({
@@ -126,6 +133,7 @@ const Products = ({
     }
 
     setCartProducts(cart)
+    resetState()
     setShowModal(!showModal)
     dispatch(addToCartAction(cart))
   }
