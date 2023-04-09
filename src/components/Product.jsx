@@ -15,7 +15,8 @@ const Product = ({
   toggleModal,
   isVeg,
   category,
-  changeProductCount
+  changeProductCount,
+  addNormalProduct
 }) => {
   const [productQuantity, setProductQuantity] = useState(1)
 
@@ -34,6 +35,8 @@ const Product = ({
   const addItem = () => {
     if (category === 'pizza') {
       toggleModal(id, title, image, price)
+    } else {
+      addNormalProduct(id, title, image, price)
     }
   }
 

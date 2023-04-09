@@ -14,6 +14,7 @@ const Products = ({
   dispatch,
   products,
   toppings,
+  cart,
   isLoading,
   isFailed,
   location
@@ -46,6 +47,10 @@ const Products = ({
   useEffect(() => {
     setFilteredResults(products)
   }, [products])
+
+  useEffect(() => {
+    setCartProducts(cart)
+  }, [cart])
 
   useEffect(() => {
     dispatch(getToppings())
@@ -135,6 +140,22 @@ const Products = ({
     setCartProducts(cart)
     resetState()
     setShowModal(!showModal)
+    dispatch(addToCartAction(cart))
+  }
+
+  const addNormalProduct = (id, title, image, price) => {
+    const cart = [
+      ...cartProducts,
+      {
+        id,
+        title,
+        image,
+        quantity: productQuantity,
+        price,
+        category
+      }
+    ]
+    setCartProducts(cart)
     dispatch(addToCartAction(cart))
   }
 
@@ -230,6 +251,7 @@ const Products = ({
                   isVeg={is_veg}
                   category={category}
                   toggleModal={toggleModal}
+                  addNormalProduct={addNormalProduct}
                 />
               )
             )
@@ -258,12 +280,14 @@ const Products = ({
 const mapStateToProps = (state) => {
   const {
     products: { data, isLoading, isFailed },
-    toppings
+    toppings,
+    cart
   } = state
 
   return {
     products: data,
     toppings: toppings.data,
+    cart: cart.data,
     isLoading,
     isFailed
   }
