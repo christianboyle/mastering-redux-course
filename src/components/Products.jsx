@@ -9,6 +9,8 @@ import Product from './Product'
 import Layout from './Layout'
 import ToppingsModal from './ToppingsModal'
 import { addToCartAction } from '../actions/cartActions'
+import 'react-toastify/dist/ReactToastify.css'
+import { toast } from 'react-toastify'
 
 const Products = ({
   dispatch,
@@ -135,6 +137,8 @@ const Products = ({
           }
         })
       }
+
+      toast.success('Product added successfully.')
     }
 
     setCartProducts(cart)
@@ -157,6 +161,7 @@ const Products = ({
     ]
     setCartProducts(cart)
     dispatch(addToCartAction(cart))
+    toast.success('Product added successfully.')
   }
 
   const handleToppingsSelection = (position) => {
